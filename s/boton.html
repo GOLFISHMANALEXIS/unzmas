@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirección con botones</title>
+</head>
+<body>
+  <h1>Redirección con botones</h1>
+  <button onclick="redireccionar('s/pizarra.html')">Botón 1</button>
+  <button onclick="redireccionar('https://www.youtube.com/watch?v=QI-ux5UgAG0')">Botón 2</button>
+  <button onclick="redireccionar('https://docs.google.com/document/d/1XP9ZmrmvIQWFm8ZeQljsBiXVsQgzXHjZ862N-0lpeaw/edit?usp=sharing')">Botón 3</button>
+
+  <script>
+    function redireccionar(url) {
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>

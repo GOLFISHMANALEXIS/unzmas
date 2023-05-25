@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kayimita</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+  </style>
+  <script>
+    function iniciarPizarra() {
+      var canvas = document.getElementById('canvas');
+      var contexto = canvas.getContext('2d');
+
+      var pintando = false;
+      var texto = "Por favor, mira hice hasta un pizarron";
+      var indice = 0;
+
+      canvas.addEventListener('mousedown', function(event) {
+        pintando = true;
+        contexto.beginPath();
+        contexto.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+      });
+
+      canvas.addEventListener('mousemove', function(event) {
+        if (pintando) {
+          contexto.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+          contexto.stroke();
+        }
+      });
+
+      canvas.addEventListener('mouseup', function() {
+        pintando = false;
+      });
+
+      canvas.addEventListener('mouseleave', function() {
+        pintando = false;
+      });
+
+      function escribirTexto() {
+        contexto.font = '18px Arial';
+        contexto.fillText(texto.substr(0, indice), 20, 20);
+        indice++;
+
+        if (indice <= texto.length) {
+          setTimeout(escribirTexto, 100);
+        }
+      }
+
+      escribirTexto();
+    }
+
+    function borrarPizarra() {
+      var canvas = document.getElementById('canvas');
+      var contexto = canvas.getContext('2d');
+      contexto.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  </script>
+</head>
+<body onload="iniciarPizarra()">
+  <h1>Lee la carta tambien este es un pequeño regalo</h1>
+  <canvas id="canvas" width="600" height="400"></canvas>
+  <br>
+  <button onclick="borrarPizarra()">Borrar</button>
+</body>
+</html>
